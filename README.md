@@ -4,7 +4,7 @@ Analyzes illegal access data retrieved with WordPress plugin [Crazy Bone]( http:
 
 ## Installation
 
-1. [Download Zip](https://github.com/msng/crazy-bone-analyzer/archive/master.zip) and unarchive it, or `git clone git@github.com:msng/crazy-bone-analyzer.git`
+1. [Download Zip](https://github.com/msng/crazy-bone-analyzer/archive/master.zip) and unarchive it, or `git clone https://github.com/msng/crazy-bone-analyzer.git`
 1. `cd crazy-bone-analyzer`
 1. Get composer.  
 `curl -s http://getcomposer.org/installer | php`
