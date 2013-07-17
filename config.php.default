@@ -1,0 +1,11 @@
+<?php
+$config = array(
+    'db' => array(
+        'host'   => 'localhost',
+        'user'   => '',
+        'pass'   => '',
+        'dbname' => '',
+        'table'  => 'wp_user_login_log',
+    ),
+);
+

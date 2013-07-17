@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Crazy Bone Analyzer</title>
+        <link href="./css/bootstrap.css" rel="stylesheet">
+        <link href="./css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div class="navbar navbar-fixed-top navbar-inverse">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="brand" href="./">Crazy Bone Analyzer</a>
+                    </div>
+                </div>
+            </div>
+            <div class="page-header">
+                <h2>Illegal access log <small>Data provided by <a href="http://wordpress.org/plugins/crazy-bone/">Crazy Bone</a></small></h2>
+                <h4>{{ data.count.records|number_format }} <span class="muted">attempts from</span> {{ data.count.ips|number_format }} <span class="muted">IP addresses<span></h4>
+            </div>
+            {% set last_index = 0 %}
+            {% for column, lines in data.log %}
+                {% if (loop.index % 2) == 1 %}
+                <div class="row">
+                {% endif %}
+                    <div class="span6">
+                        <h2>{{ column }}</h2>
+                        <table class="table table-striped">
+                        {% for name, count in lines %}
+                            <tr>
+                                <th>{{ name }}</th>
+                                <td class="num">{{ count|number_format }}</td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    </div><!-- end of .span6 -->
+                {% if (loop.index % 2) == 0 %}
+                </div><!-- end of .row -->
+                {% endif %}
+                {% set last_index = loop.index %}
+            {% endfor %}
+            {% if (last_index % 2) == 1 %}
+            </div><!-- end of .row -->
+            {% endif %}
+        </div><!-- end of .container -->
+        <script src="./js/bootstrap.min.js"></script>
+    </body>
+</html>
