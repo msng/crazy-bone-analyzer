@@ -16,8 +16,8 @@ class LoginLogAnalyzer
 
 	public function __construct()
 	{
-        $this->root = dirname(__FILE__);
-		require $this->root . '/config.php';
+        $this->root = dirname(dirname(__FILE__));
+		require $this->root . '/config/config.php';
 
 		$this->dbConfig = $config['db'];
 		$this->db = $this->createDbHandler();
