@@ -1,6 +1,10 @@
 # Crazy Bone Analyzer
 
-Analyzes illegal access data retrieved with WordPress plugin [Crazy Bone]( http://wordpress.org/plugins/crazy-bone/ )
+Analyzes illegal access data retrieved with WordPress plugin [Crazy Bone](http://wordpress.org/plugins/crazy-bone/)
+
+## Requirement
+
+[Crazy Bone](http://wordpress.org/plugins/crazy-bone/) must be installed and activated on your WordPress site.
 
 ## Installation
 
