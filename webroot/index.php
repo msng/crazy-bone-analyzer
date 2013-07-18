@@ -14,24 +14,24 @@ class LoginLogAnalyzer
         ),
     );
 
-	public function __construct()
-	{
+    public function __construct()
+    {
         $this->root = dirname(dirname(__FILE__));
-		require $this->root . '/config/config.php';
+        require $this->root . '/config/config.php';
 
-		$this->dbConfig = $config['db'];
-		$this->db = $this->createDbHandler();
+        $this->dbConfig = $config['db'];
+        $this->db = $this->createDbHandler();
 
         $data = $this->analyze();
         $this->show($data);
-	}
+    }
 
-	public function analyze()
-	{
+    public function analyze()
+    {
         $log = $this->prepareLog();
-		$sql = $this->getSqlForLoginLog();
-		$sth = $this->db->query($sql);
-		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+        $sql = $this->getSqlForLoginLog();
+        $sth = $this->db->query($sql);
+        while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
             $error = unserialize($row['activity_errors']);
             foreach ($this->columns['serialized'] as $column) {
                 if (isset($error[$column])) {
@@ -49,7 +49,7 @@ class LoginLogAnalyzer
                     $log[$column][$row[$column]]++;
                 }
             }
-		}
+        }
         $log = $this->sortLog($log);
 
         $sql = "
@@ -58,7 +58,7 @@ class LoginLogAnalyzer
                 count(DISTINCT activity_IP) as `ips`
             FROM wp_user_login_log
         ";
-		$sth = $this->db->query($sql);
+        $sth = $this->db->query($sql);
         $count = $sth->fetch(PDO::FETCH_ASSOC);
 
         $data = array(
@@ -66,25 +66,25 @@ class LoginLogAnalyzer
             'count' => $count,
         );
         return $data;
-	}
+    }
 
     public function createDbHandler() {
-		$dsn = $this->getDsn();
-		$options = array(
+        $dsn = $this->getDsn();
+        $options = array(
             //reserved for PHP < 5.3.6
-			PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-		);
-		$dbh = new PDO($dsn, $this->dbConfig['user'], $this->dbConfig['pass'], $options);
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+        );
+        $dbh = new PDO($dsn, $this->dbConfig['user'], $this->dbConfig['pass'], $options);
         return $dbh;
     }
 
     public function getDsn() {
-		$dsn = 'mysql:host=' . $this->dbConfig['host'] . ';dbname=' . $this->dbConfig['dbname'] . ';charset=utf8';
+        $dsn = 'mysql:host=' . $this->dbConfig['host'] . ';dbname=' . $this->dbConfig['dbname'] . ';charset=utf8';
         return $dsn;
     }
 
     public function getSqlForLoginLog() {
-		$sql = "SELECT * FROM {$this->dbConfig['table']} WHERE activity_errors IS NOT NULL";
+        $sql = "SELECT * FROM {$this->dbConfig['table']} WHERE activity_errors IS NOT NULL";
         return $sql;
     }
 
@@ -137,7 +137,7 @@ class LoginLogAnalyzer
 
         echo $twig->render('index.html', array('data' => $data));
     }
-	
+
 }
 new LoginLogAnalyzer();
 
