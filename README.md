@@ -14,7 +14,7 @@ Analyzes illegal access data retrieved with WordPress plugin [Crazy Bone](http:/
 `curl -s http://getcomposer.org/installer | php`
 1. Install components via composer.  
 `php composer.phar install`
-1. Make `compilation\_cache/` directory writable by PHP.
+1. Make `compilation_cache/` directory writable by PHP.
 1. Copy `config.php.default` to `config.php` and edit the config file to fit your WordPress database setting.
 1. Set the document root to `webroot/` or access there directly (the latter option might need some code updates to resolve require paths.)
 1. Enjoy.
